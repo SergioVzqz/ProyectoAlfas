@@ -18,5 +18,6 @@ from django.urls import path
 from Apps.Usuarios import views as views_usuarios
 
 urlpatterns = [
-    path('users/', views_usuarios.renderizado , name = 'usuarios'),
+    path('', views_usuarios.loginn, name = 'home'),
+    path('register', views_usuarios.register, name='register')
 ]

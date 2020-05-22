@@ -1,7 +1,9 @@
 from django.db import models
 import os
 from django.conf import settings
-from django.contrib.auth.models import User
+from Apps.Usuarios.models import User
+# from django.contrib.auth.models import User
+
 
 
 def images_path():

@@ -18,5 +18,5 @@ from django.urls import path
 from Apps.Reproduccion import views as views_reproduccion
 
 urlpatterns = [
-    path('home', views_reproduccion.home, name = 'home'),
+    path('', views_reproduccion.home, name = 'home'),
 ]
