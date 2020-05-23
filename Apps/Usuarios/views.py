@@ -59,7 +59,7 @@ def register(request):
                 user.pais = pais
                 user.foto = foto
                 user.is_artist = is_artis
-                user.set_password = password
+                user.set_password(password)
                 user.save()
                 form.add_error(None, 'Usuario creado exitosamente')
                 return render(request, 'register.html', {'form': form})
