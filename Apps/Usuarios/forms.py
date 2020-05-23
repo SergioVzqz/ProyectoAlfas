@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from django.contrib.auth.models import User
+from Apps.Usuarios.models import User
 
 
 class LoginForm(forms.Form):
@@ -22,13 +22,19 @@ class RegisterForm(ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingresa tu nombre'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingresa tu apellido'}),
 
-            'fechaNacimiento': forms.DateInput(format='%d,%m,%Y', attrs={'class': 'form-control', 'required': 'true','placeholder':'DD/MM/AAAA'}),
-            'pais': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingresa un correo'}),
-
-
+            'fechaNacimiento': forms.DateInput(format='%d/%m/%Y', attrs={'class': 'form-control', 'required': 'true','placeholder':'DD/MM/AAAA'}),
+            'pais': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Pais'}),
+            'foto': forms.ClearableFileInput(attrs={'class':'form-control'}),
+            'is_artist': forms.CheckboxInput(attrs={'class':'form-check-label'}),
+        }
+        labels={
+            'fechaNacimiento':'Fecha de Nacimiento',
+            'pais': 'Pais actual',
+            'foto': 'Foto de perfil',
         }
 
         help_texts = {
             'username': 'Maximo 150 caracteres',
-            'password': 'Minimo 8 caracteres'
+            'password': 'Minimo 8 caracteres',
+            'foto': 'Opcional'
         }
