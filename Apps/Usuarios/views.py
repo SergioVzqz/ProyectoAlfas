@@ -55,6 +55,7 @@ def register(request):
             if created:
                 user.first_name = nombre
                 user.last_name = apellido
+                user.fechaNacimiento = fechaNacimiento
                 user.pais = pais
                 user.foto = foto
                 user.is_artist = is_artis
