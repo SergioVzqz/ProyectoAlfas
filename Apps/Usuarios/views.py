@@ -6,6 +6,10 @@ from Apps.Usuarios.models import User
 # HTTPRESPONSE, JSONRESPONSE, RENDER
 
 # Create your views here.
+
+def home(request):
+    return render(request, 'home.html')
+
 def loginn(request):
     
 
