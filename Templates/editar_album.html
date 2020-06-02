@@ -1,0 +1,162 @@
+{% extends 'navbar_artista.html' %}
+{% load static %}
+
+{% block content %}
+<script>
+    $(function () {
+        $("#fechaAlbum").datepicker({
+            maxDate: "+5Y",
+            dateFormat: "yy-mm-dd"
+        })
+    })
+</script>
+
+<div class="container my-3">
+
+    <h1 class="display-3">
+        Editar album
+    </h1>
+
+
+    {% regroup canciones by album as lista_albums %}
+    {% for album in lista_albums  %}
+
+    <!-- Bloque de album -->
+    <div class="row d-block pt-2 " id="idAlbum" data-idalbum="{{idAlbum }}">
+
+        <div class="row ">
+            <div class="col-4 p-4">
+                <img src="{{MEDIA_URL}}{{album.grouper.foto}}" alt="Spotify" class="img-fluid">
+            </div>
+            <div class="col-8 py-5 align-self-center">
+                <div class="input-group m-3">
+                    <input type="text" class="form-control form-control-lg" placeholder="Nombre del album"
+                        id="nombreAlbum" value="{{ album.grouper.nombre }}">
+                </div>
+                <div class="input-group m-3">
+                    <input type="text" class="form-control form-control-lg" placeholder="Genero" id="generoAlbum"
+                        value="{{ album.grouper.genero  }}">
+                </div>
+                <div class="input-group m-3">
+                    <input type="text" id="fechaAlbum" class="form-control form-control-lg" placeholder="Fecha"
+                        value="{{  album.grouper.fecha|date:"Y-m-d"  }}">
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Artista</th>
+                            <th scope="col">Total canciónes</th>
+                            <th scope="col">Duración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ album.grouper.artista }}</td>
+                            <td>{{album.list|length }}</td>
+                            <td>{{ album.grouper.duracion}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">No. Canción</th>
+                    <th scope="col">Nombre de la canción</th>
+                    <th scope="col">Autor(es)</th>
+                    <th scope="col">Duración</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cancion in album.list %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{cancion.nombre}}</td>
+                    <td>{{cancion.autor}}</td>
+                    <td>{{cancion.duracion}}</td>
+                    <td><a href="" class="btn btn-outline-dark">Editar</a></td>
+                    <td><a href="" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <button type="button" class="btn btn-outline-dark btn-lg btn-block my-5" data-toggle="modal"
+            data-target="#exampleModalCenter">Agregar canción</button>
+    </div>
+
+    <!-- Botones -->
+    <div class="row my-0">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-dark btn-lg btn-block text-white my-2"
+                onclick="actualizarAlbum()">Editar album</button>
+        </div>
+        <div class="col-md-6">
+
+            <button type="button" class="btn btn-danger btn-lg btn-block text-white my-2"
+                onclick="eliminarAlbum()">Eliminar album</button>
+        </div>
+    </div>
+
+    <div  class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="idAlbum" data-idalbum="{{idAlbum}}">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tituloAlbum">Subir canción a {{ album.grouper.nombre }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="nombreCancion">Nombre de la canción</label>
+                            <input type="text" class="form-control" id="nombreCancion" placeholder="Nombre cancion">
+                        </div>
+                        <div class="form-group">
+                            <label for="duracionCancion">Duración</label>
+                            <input type="number" class="form-control" id="duracionCancion" placeholder="Duración" min="0" step=".01">
+                        </div>
+                        <div class="form-group">
+                            <label for="autorCancion">Autor de la canción</label>
+                            <input type="text" class="form-control" id="autorCancion" placeholder="Autor(es)">
+                        </div>
+                        <div class="form-group">
+                            <label for="archivo">Subir canción</label>
+                            <input id="archivoCancion" class="form-control-file" accept=".mp3" name="archivo" type="file" placeholder="Archivo" >
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% endfor %}
+
+</div>
+
+
+
+
+</div>
+
+
+<div class="p-4 mt-auto container-fluid bg-dark text-white d-flex justify-content-center align-items-center">
+    Derechos reservados Sergio
+</div>
+</body>
+
+</html>
+{% endblock %}

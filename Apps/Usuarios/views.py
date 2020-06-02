@@ -1,17 +1,19 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, RegisterForm
+from Apps.Artista import views as views_artista
 from Apps.Reproduccion import views as views_reproduccion
 from Apps.Usuarios.models import User
 # HTTPRESPONSE, JSONRESPONSE, RENDER
 
 # Create your views here.
 
+
 def home(request):
     return render(request, 'home.html')
 
+
 def loginn(request):
-    
 
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -21,23 +23,23 @@ def loginn(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect(views_reproduccion.home)
+                return redirect(views_artista.home_artista)
             else:
                 form.add_error(None, 'Revisa tus datos')
-                return render(request, 'login.html', {'form':form})
+                return render(request, 'login.html', {'form': form})
 
         else:
             return HttpResponse('Revisa tu formulario')
 
-
     else:
         form = LoginForm()
-        return render(request, 'login.html', {'form':form})
+        return render(request, 'login.html', {'form': form})
+
 
 def register(request):
 
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = RegisterForm(request.POST, request.FILES)
 
         if form.is_valid():
 
@@ -51,25 +53,31 @@ def register(request):
             foto = form.cleaned_data['foto']
             is_artis = form.cleaned_data['is_artist']
 
-            user, created= User.objects.get_or_create(
+            user = User.objects.filter(username=username)
+            email_user = User.objects.filter(email=email)
+
+            if(len(user) > 0):
+                form.add_error('username', 'Este usuario ya esta registrado')
+                return render(request, 'register.html', {'form': form})
+
+            if(len(email_user) > 0):
+                form.add_error('email', 'Este correo ya esta registrado')
+                return render(request, 'register.html', {'form': form})
+            
+            user = User(
                 username = username,
-                email = email
+                email = email,
+                first_name = nombre,
+                last_name = apellido,
+                fechaNacimiento = fechaNacimiento,
+                pais = pais,
+                foto = foto,
+                is_artist = is_artis,
             )
-
-            if created:
-                user.first_name = nombre
-                user.last_name = apellido
-                user.fechaNacimiento = fechaNacimiento
-                user.pais = pais
-                user.foto = foto
-                user.is_artist = is_artis
-                user.set_password(password)
-                user.save()
-                form.add_error(None, 'Usuario creado exitosamente')
-                return render(request, 'register.html', {'form': form})
-            else:
-                return render(request, 'register.html', {'form': form})
-
+            user.set_password(password)
+            user.save()
+            form.add_error(None, 'Usuario creado exitosamente')
+            return render(request, 'register.html', {'form': form})
         else:
             return render(request, 'register.html', {'form': form})
     else:

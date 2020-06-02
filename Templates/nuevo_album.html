@@ -1,0 +1,61 @@
+{% extends 'navbar_artista.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container my-3">
+
+    <form class="my-3">
+        <div class="form-group">
+            <label for="Nombre">Nombre del album</label>
+            <input type="text" class="form-control form-control-lg" id="Nombre" placeholder="Nombre">
+        </div>
+        <div class="row">
+            <div class="form-group col-6">
+                <label for="Fecha">Fecha</label>
+                <input type="text" class="form-control form-control-lg" id="Fecha" placeholder="DD/MM/AAAA">
+            </div>
+            <div class="form-group col-6">
+                <label for="Imagen">Imagen</label>
+                <input type="File" class="form-control-file form-control-lg" id="Imagen" >
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-6">
+                <label for="Disquera">Disquera</label>
+                <input type="text" class="form-control form-control-lg" id="Disquera" placeholder="DD/MM/AAAA">
+            </div>
+            <div class="form-group col-6">
+                <label for="Genero">Genero</label>
+                <input type="text" class="form-control form-control-lg" id="Genero" placeholder="image">
+            </div>
+        </div>
+
+        <input type="submit" value="Crear album" class="btn btn-dark btn-lg">
+    </form>
+
+
+</div>
+
+
+<div class="container">
+    <div class="row">
+
+    </div>
+</div>
+
+
+
+
+
+
+<div class="p-4 mt-auto container-fluid bg-dark text-white d-flex justify-content-center align-items-center">
+    Derechos reservados Sergio
+</div>
+
+
+
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,20 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    
+}
+
+body, html{
+    height: 100%;
+    width: 100%;
+   
+}
+
+body{
+    background-color: #e5e5e5;
+}
+
+.img-max {
+    max-height: 300px;
+
+  }

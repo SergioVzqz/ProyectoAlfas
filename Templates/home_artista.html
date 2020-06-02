@@ -1,0 +1,65 @@
+
+{% extends 'navbar_artista.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Body -->
+    <div class="container ">
+        <div class="row my-5">
+            <div class="col-10">
+                <div class="row p-2 mb-5">
+                    <div class="col-4">
+                        <img src="{% static 'img/upload.png' %}" alt="" class="img-fluid">
+                    </div>
+                    <div class="col-8 d-flex align-items-center">
+                        <h1 class="display-3 ">
+                            Agregar Album
+                        </h1>
+                    </div>
+                </div>
+                <div class="row p-2 my-5">
+                    <div class="col-4">
+                        <img src="{% static 'img/config.png' %}" alt="" class="img-fluid">
+                    </div>
+                    <div class="col-8 d-flex align-items-center">
+                        <h1 class="display-3">
+                            Modificar album
+                        </h1>
+                    </div>
+                </div>
+                <div class="row p-2 mb-5">
+                    <div class="col-4">
+                        <img src="{% static 'img/user_config.png' %}" alt="" class="img-fluid">
+                    </div>
+                    <div class="col-8 d-flex align-items-center">
+                        <h1 class="display-3">
+                            Modificar perfil
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2 text-center container pt-5">
+                <p class="h3 font-weight-bold">
+                    Estadisticas de la semana
+                </p>
+
+                <p class="h4">
+                    Reproducciones
+                </p>
+                <p>
+                    1,000
+                </p>
+                <p class="h4">
+                    Horas totales
+                </p>
+                <p>
+                    32,56.20
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}
