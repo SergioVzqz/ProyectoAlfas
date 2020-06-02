@@ -21,65 +21,65 @@
 
     {% for album in lista_albums  %}
 
-    <div class="row d-block pt-2 bloque-album ">
+        <div class="row d-block pt-2 bloque-album ">
 
-        <div class="row ">
-            <div class="col-4 p-4">
-                <img src="{{MEDIA_URL}}{{album.grouper.foto}}" alt="Spotify" class="img-fluid">
+            <div class="row ">
+                <div class="col-4 p-4">
+                    <img src="{{MEDIA_URL}}{{album.grouper.foto}}" alt="Spotify" class="img-fluid">
+                </div>
+                <div class="col-8 py-5 align-self-center">
+                    <h1>{{ album.grouper.nombre }}</h1>
+                    <h1>Artista: {{ album.grouper.artista }}</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Año</th>
+                                <th scope="col">Genero</th>
+                                <th scope="col">Total canciónes</th>
+                                <th scope="col">Duración</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ album.grouper.fecha }}</td>
+                                <td>{{ album.grouper.genero }}</td>
+                                <td>{{album.list|length }}</td>
+                                <td>{{ album.grouper.duracion}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <a class="btn btn-dark" href="{% url 'editar_album' idAlbum=album.grouper.id %}" role="button">Editar
+                        album</a>
+
+                </div>
             </div>
-            <div class="col-8 py-5 align-self-center">
-                <h1>{{ album.grouper.nombre }}</h1>
-                <h1>Artista: {{ album.grouper.artista }}</h1>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Año</th>
-                            <th scope="col">Genero</th>
-                            <th scope="col">Total canciónes</th>
-                            <th scope="col">Duración</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ album.grouper.fecha }}</td>
-                            <td>{{ album.grouper.genero }}</td>
-                            <td>{{album.list|length }}</td>
-                            <td>{{ album.grouper.duracion}}</td>
-                        </tr>
-                    </tbody>
-                </table>
 
-                <a class="btn btn-dark" href="{% url 'editar_album' idAlbum=album.grouper.id %}" role="button">Editar
-                    album</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">No. Canción</th>
+                        <th scope="col">Nombre de la canción</th>
+                        <th scope="col">Autor(es)</th>
+                        <th scope="col">Duración</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cancion in album.list %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{cancion.nombre}}</td>
+                        <td>{{cancion.autor}}</td>
+                        <td>{{cancion.duracion}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-            </div>
+
+
+
         </div>
-        
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">No. Canción</th>
-                    <th scope="col">Nombre de la canción</th>
-                    <th scope="col">Autor(es)</th>
-                    <th scope="col">Duración</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for cancion in album.list %}
-                <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{cancion.nombre}}</td>
-                    <td>{{cancion.autor}}</td>
-                    <td>{{cancion.duracion}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-     
-
-
-    </div>
     {% endfor %}
 
 
