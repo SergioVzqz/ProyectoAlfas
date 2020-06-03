@@ -20,5 +20,6 @@ from Apps.Usuarios import views as views_usuarios
 urlpatterns = [
     path('', views_usuarios.home, name = 'home'),
     path('loginn', views_usuarios.loginn, name = 'loginn'),
-    path('register', views_usuarios.register, name='register')
+    path('register', views_usuarios.register, name='register'),
+    path('cerrarsesion', views_usuarios.cerrar_sesion, name='cerrar_sesion')
 ]

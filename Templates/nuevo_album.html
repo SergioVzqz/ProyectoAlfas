@@ -2,38 +2,73 @@
 {% load static %}
 
 {% block content %}
+<script>
+    $(function () {
+        $("#fechaAlbum").datepicker({
+            maxDate: "+5Y",
+            dateFormat: "yy-mm-dd"
+        })
+    });
+</script>
+
+
+<!-- Modales -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalExito">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-success">Compleato</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>El album fue creado con exito</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="container my-3">
 
     <form class="my-3">
         <div class="form-group">
             <label for="Nombre">Nombre del album</label>
-            <input type="text" class="form-control form-control-lg" id="Nombre" placeholder="Nombre">
+            <input type="text" class="form-control form-control-lg" id="nombreAlbum" placeholder="Nombre">
         </div>
         <div class="row">
             <div class="form-group col-6">
-                <label for="Fecha">Fecha</label>
-                <input type="text" class="form-control form-control-lg" id="Fecha" placeholder="DD/MM/AAAA">
+                <label for="fechaAlbum">Fecha</label>
+                <input type="text" class="form-control form-control-lg" id="fechaAlbum" placeholder="DD/MM/AAAA">
             </div>
             <div class="form-group col-6">
-                <label for="Imagen">Imagen</label>
-                <input type="File" class="form-control-file form-control-lg" id="Imagen" >
+                <label for="imagenAlbum">Imagen</label>
+                <input type="File" class="form-control-file form-control-lg" id="imagenAlbum">
             </div>
         </div>
         <div class="row">
             <div class="form-group col-6">
-                <label for="Disquera">Disquera</label>
-                <input type="text" class="form-control form-control-lg" id="Disquera" placeholder="DD/MM/AAAA">
+                <label for="disqueraAlbum">Disquera</label>
+                <input type="text" class="form-control form-control-lg" id="disqueraAlbum" placeholder="Disquera">
             </div>
             <div class="form-group col-6">
-                <label for="Genero">Genero</label>
-                <input type="text" class="form-control form-control-lg" id="Genero" placeholder="image">
+                <label for="genero">Genero</label>
+                <input type="text" class="form-control form-control-lg" id="generoAlbum" placeholder="Genero">
             </div>
+        </div>
+        <div class="form-group">
+            <label for="cancionesAlbum">Canciones</label>
+            <input type="File" accept=".mp3" class="form-control-file form-control-lg" id="cancionesAlbum" multiple>
         </div>
 
-        <input type="submit" value="Crear album" class="btn btn-dark btn-lg">
+
+
     </form>
-
+    <Button type="submit" class="btn btn-dark btn-lg" onclick="agregarAlbum()"> Crear album </button>
 
 </div>
 

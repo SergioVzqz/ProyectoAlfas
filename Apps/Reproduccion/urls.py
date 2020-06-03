@@ -19,4 +19,5 @@ from Apps.Reproduccion import views as views_reproduccion
 
 urlpatterns = [
     path('', views_reproduccion.home, name = 'home'),
+    path('busqueda', views_reproduccion.busqueda, name = 'busqueda'),
 ]

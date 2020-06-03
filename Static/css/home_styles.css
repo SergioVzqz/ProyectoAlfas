@@ -2,6 +2,14 @@
     padding: 0;
     margin: 0;
 }
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    background-color: #e5e5e5 !important;
+}
 
 .banner{
     background-image: url("/Static/img/banner.jpg");

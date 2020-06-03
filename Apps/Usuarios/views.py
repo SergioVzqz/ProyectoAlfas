@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, RegisterForm
 from Apps.Artista import views as views_artista
 from Apps.Reproduccion import views as views_reproduccion
@@ -10,7 +10,10 @@ from Apps.Usuarios.models import User
 
 
 def home(request):
-    return render(request, 'home.html')
+    if(request.user.is_authenticated):
+        return redirect('home_artista')
+    else:
+        return render(request, 'home.html')
 
 
 def loginn(request):
@@ -83,3 +86,8 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, 'register.html', {'form': form})
+
+
+def cerrar_sesion(request):
+    logout(request)
+    return redirect(home)

@@ -20,12 +20,17 @@ from Apps.Artista import views as views_artista
 urlpatterns = [
     path('', views_artista.home_artista, name='home_artista'),
     path('albums/', views_artista.albums, name='albums'),
-    path('albums/nuevo/', views_artista.nuevo_album, name='agregar_album'),
+    path('albums/nuevo/', views_artista.nuevo_album, name='nuevo_album'),
     path('albums/editar/<int:idAlbum>',
          views_artista.editar_album, name='editar_album'),
     path('perfil_artista/', views_artista.perfil_artista, name='perfil_artista'),
-    path('cambiar_password/', views_artista.cambiar_password, name='cambiar_password'),
+    path('cambiar_password/', views_artista.cambiar_password,
+         name='cambiar_password'),
     path('albums/update', views_artista.actualizar_album, name='actualizar_album'),
-    path('albums/delete', views_artista.eliminar_album, name='eliminar_album')
+    path('albums/delete', views_artista.eliminar_album, name='eliminar_album'),
+    path('albums/nuevo/add', views_artista.agregar_album, name='agregar_album'),
+    path('cancion/add', views_artista.agregar_cancion, name='agregar_cancion'),
+    path('cancion/delete', views_artista.eliminar_cancion, name='eliminar_cancion'),
+    path('cancion/update', views_artista.actualizar_cancion, name='actualizar_cancion'),
 
 ]
