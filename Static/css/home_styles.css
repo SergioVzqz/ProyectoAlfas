@@ -12,6 +12,11 @@ body{
 }
 
 .banner{
-    background-image: url("/Static/img/banner.jpg");
-   
+    background-image: url("/Static/img/banner.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
 }
+
+
+

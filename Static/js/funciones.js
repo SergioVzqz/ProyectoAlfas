@@ -254,8 +254,8 @@ agregarAlbum = () => {
 }
 
 buscarCancion = () =>{
-    let texto = document.getElementById("search").value;
-    let token = getCookie('csrftoken');
+    let texto = document.getElementById("search").value
+    let token = getCookie("csrftoken")
     $.ajax({
         type: 'POST',
         url: 'http://127.0.0.1:8000/reproduccion/busqueda',

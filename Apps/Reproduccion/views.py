@@ -1,23 +1,24 @@
 from django.shortcuts import render, HttpResponse
-from .models import Cancion
+from .models import Cancion, Album
 from django.db.models import Q
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 # HTTPRESPONSE, JSONRESPONSE, RENDER
 
 # Create your views here.
 
-
+@login_required
 def home(request):
     canciones = Cancion.objects.all()
     return render(request, 'home_rep.html', {
         'canciones': canciones
     })
 
-
+@login_required
 def busqueda(request):
     texto = request.POST['texto']
-    if texto != "":
+    if (texto != ""):
         canciones = Cancion.objects.filter(
             Q(nombre__icontains=texto) |
             Q(autor__icontains=texto) |

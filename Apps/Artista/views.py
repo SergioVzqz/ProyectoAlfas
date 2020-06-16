@@ -2,14 +2,16 @@ from django.shortcuts import render, HttpResponse, redirect
 from Apps.Reproduccion.models import Album, Cancion, Genero, Disquera
 import json
 from django.db.models import Q
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 # Create your views here.
 
 @login_required
+@user_passes_test(lambda user: user.isArtist()==True)
 def home_artista(request):
     return render(request, 'home_artista.html')
 
 @login_required
+@user_passes_test(lambda user: user.isArtist()==True)
 def albums(request):
     album_artista = Album.objects.filter(artista = request.user).values('id')
     album_canciones = Cancion.objects.filter(album__artista=request.user).values('album')
@@ -24,11 +26,13 @@ def albums(request):
         'albums': albums
     })
 
-
+@login_required
+@user_passes_test(lambda user: user.isArtist()==True)
 def nuevo_album(request):
     return render(request, 'nuevo_album.html')
 
-
+@login_required
+@user_passes_test(lambda user: user.isArtist()==True)
 def editar_album(request, idAlbum):
     album = Album.objects.get(id=idAlbum)
     canciones = Cancion.objects.filter(album__id=idAlbum)
@@ -39,14 +43,17 @@ def editar_album(request, idAlbum):
     })
 
 @login_required
+@user_passes_test(lambda user: user.isArtist()==True)
 def perfil_artista(request):
     return render(request, 'perfil_artista.html')
 
-
+@login_required
+@user_passes_test(lambda user: user.isArtist()==True)
 def cambiar_password(request):
     return render(request, 'cambiar_password.html')
 
-
+@login_required
+@user_passes_test(lambda user: user.isArtist()==True)
 def actualizar_album(request):
     datos = json.loads(request.body)
     idAlbum = int(datos['idAlbum'])
@@ -69,7 +76,8 @@ def actualizar_album(request):
         print(identifier)
         return HttpResponse(False)
 
-
+@login_required
+@user_passes_test(lambda user: user.isArtist()==True)
 def eliminar_album(request):
     idAlbum = int(json.loads(request.body))
 
@@ -80,7 +88,8 @@ def eliminar_album(request):
     except Exception as identifier:
         return HttpResponse(False)
 
-
+@login_required
+@user_passes_test(lambda user: user.isArtist()==True)
 def agregar_cancion(request):
     nombreCancion = request.POST['nombreCancion']
     duracionCancion = request.POST['duracionCancion']
@@ -104,7 +113,8 @@ def agregar_cancion(request):
         print(error)
         return HttpResponse(False)
 
-
+@login_required
+@user_passes_test(lambda user: user.isArtist()==True)
 def eliminar_cancion(request):
     try:
         idCancion = request.POST['idCancion']
@@ -115,7 +125,8 @@ def eliminar_cancion(request):
         print(error)
         return HttpResponse(False)
 
-
+@login_required
+@user_passes_test(lambda user: user.isArtist()==True)
 def actualizar_cancion(request):
     try:
         idCancion = request.POST['idCancion']
@@ -129,7 +140,8 @@ def actualizar_cancion(request):
         print(error)
         return HttpResponse(False)
 
-
+@login_required
+@user_passes_test(lambda user: user.isArtist()==True)
 def agregar_album(request):
     try:
         nombreAlbum = request.POST['nombreAlbum']

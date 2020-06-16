@@ -4,6 +4,7 @@ from .forms import LoginForm, RegisterForm
 from Apps.Artista import views as views_artista
 from Apps.Reproduccion import views as views_reproduccion
 from Apps.Usuarios.models import User
+from django.contrib.auth.decorators import login_required
 # HTTPRESPONSE, JSONRESPONSE, RENDER
 
 # Create your views here.
@@ -11,7 +12,11 @@ from Apps.Usuarios.models import User
 
 def home(request):
     if(request.user.is_authenticated):
-        return redirect('home_artista')
+        if (request.user.is_artist):
+            return redirect('home_artista')
+        else:
+            return redirect('home')
+        
     else:
         return render(request, 'home.html')
 
@@ -26,7 +31,10 @@ def loginn(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect(views_artista.home_artista)
+                if (user.is_artist):
+                    return redirect(views_artista.home_artista)
+                else:
+                    return redirect(views_reproduccion.home)
             else:
                 form.add_error(None, 'Revisa tus datos')
                 return render(request, 'login.html', {'form': form})

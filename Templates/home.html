@@ -44,7 +44,7 @@
         </div>
     </nav>
 
-    <div class="jumbotron jumbotron-fluid banner ">
+    <div class="jumbotron h-100 jumbotron-fluid banner m-0">
         
         <div class="container text-white text-center ">
             <h1 class="display-3">
@@ -53,11 +53,11 @@
             <img src="{% static 'img/logo_w.png' %}" alt="" height="100" class="my-4">
             
             <p class="my-5">
-                <a href="" class="btn btn-lg btn-dark rounded-pill btn-loging mx-3" role="button">
-                    Iniciar sesion
-                </a>
-                <a href="" class="btn btn-lg btn-secondary rounded-pill btn-signin mx-3" role="button">
+                <a href="{% url 'register' %}" class="btn btn-lg btn-dark rounded-pill btn-loging mx-3" role="button">
                     Registrate
+                </a>
+                <a href="{% url 'loginn' %}" class="btn btn-lg btn-secondary rounded-pill btn-signin mx-3" role="button">
+                    Inicia sesión
                 </a>
             </p>
                 
@@ -66,7 +66,7 @@
     </div>
 
     <div class="p-4 mt-auto container-fluid bg-dark text-white d-flex justify-content-center align-items-center">
-        Derechos reservados Sergio
+        Derechos reservados Sergio y Hugo
     </div>
 </body>
 
